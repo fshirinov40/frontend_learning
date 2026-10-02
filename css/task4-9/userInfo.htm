@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form style="display: flex; flex-direction: column; max-width: 400px">
+      <label for="ad">Ad:</label>
+      <input type="text" name="ad" id="ad" />
+      <br />
+      <label for="yas">Yas:</label>
+      <input type="text" name="yas" id="yas" />
+      <br />
+      <label for="boy">Boy:</label>
+      <input type="text" name="boy" id="boy" />
+      <br />
+      <select id="select">
+        <option>telebeyem</option>
+        <option>telebe deyilem</option>
+      </select>
+      <br />
+    </form>
+    <button id="submit">submit</button>
+    <div id="melumat_bloku"></div>
+    <script>
+      const button = document.getElementById("submit");
+      button.onclick = function () {
+        const ad = document.getElementById("ad").value;
+        const yas = document.getElementById("yas").value;
+        const boy = document.getElementById("boy").value;
+        const select = document.getElementById("select").value;
+        const melumat_bloku = document.getElementById("melumat_bloku");
+        melumat_bloku.innerHTML = `
+          <p>Ad: ${ad}</p>
+          <p>Yas ${yas}</p>
+          <p>Boy: ${boy}</p>
+          <p>Status: ${select}</p>
+        `;
+      };
+    </script>
+  </body>
+</html>
