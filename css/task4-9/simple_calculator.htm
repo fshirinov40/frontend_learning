@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action=""
+      style="display: flex; flex-direction: column; max-width: 400px"
+    >
+      <label for="fNumber">First number</label>
+      <input type="number" id="fNumber" />
+      <br />
+      <label for="sNumber">Second number</label>
+      <input type="number" id="sNumber" />
+      <br />
+
+      <select id="select" style="max-width: 50px">
+        <option>+</option>
+        <option>-</option>
+        <option>*</option>
+        <option>/</option>
+      </select>
+      <br />
+    </form>
+    <button id="submit">submit</button>
+    <div id="melumat"></div>
+  </body>
+
+  <script>
+    const button = document.getElementById("submit");
+    const melumat = document.getElementById("melumat");
+    button.onclick = function () {
+      const fNumber = Number(document.getElementById("fNumber").value);
+      const sNumber = Number(document.getElementById("sNumber").value);
+      const select = document.getElementById("select").value;
+
+      if (select === "+") {
+        melumat.innerHTML = fNumber + sNumber;
+      }
+      if (select === "-") {
+        melumat.innerHTML = fNumber - sNumber;
+      }
+      if (select === "*") {
+        melumat.innerHTML = fNumber * sNumber;
+      }
+      if (select === "/") {
+        melumat.innerHTML = fNumber / sNumber;
+        if (sNumber === 0) {
+          melumat.innerHTML = "cannot divide by zero";
+        }
+      }
+    };
+  </script>
+</html>
