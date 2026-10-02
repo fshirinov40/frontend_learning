@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action=""
+      style="display: flex; flex-direction: column; max-width: 400px"
+    >
+      <label for="temp">Temperature:</label>
+      <input type="number" name="temp" id="temperature" />
+      <br />
+      <label for="conv">Convertion type:</label>
+      <select name="conv" id="convertion_type">
+        <option>C</option>
+        <option>F</option>
+      </select>
+      <br />
+    </form>
+    <button id="submit">submit</button>
+    <div id="info"></div>
+    <script>
+      const button = document.getElementById("submit");
+      const info = document.getElementById("info");
+      button.onclick = function () {
+        const temperature = Number(
+          document.getElementById("temperature").value,
+        );
+        const convertion_type =
+          document.getElementById("convertion_type").value;
+        let result;
+        if (convertion_type == "C") {
+          result = (temperature * 9) / 5 + 32;
+          info.innerHTML = `
+          <p>${temperature} C = ${result} F</p>
+        `;
+        } else if (convertion_type == "F") {
+          result = ((temperature - 32) * 5) / 9;
+          info.innerHTML = `
+          <p>${temperature} F = ${result} C</p>
+        `;
+        }
+      };
+    </script>
+  </body>
+</html>
