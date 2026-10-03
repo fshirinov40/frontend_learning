@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form style="display: flex; flex-direction: column; max-width: 400px">
+      <label for="uname">Username:</label>
+      <input type="text" id="uname" />
+      <br />
+      <label for="pass">Password:</label>
+      <input type="password" id="pass" />
+      <br />
+    </form>
+    <button id="submit">submit</button>
+    <div id="info"></div>
+    <script>
+      const info = document.getElementById("info");
+      const button = document.getElementById("submit");
+      const correctUsername = "admin";
+      const correctPassword = "12345";
+      button.onclick = function () {
+        const Username = document.getElementById("uname").value;
+        const Password = document.getElementById("pass").value;
+        if (Username === "") {
+          info.innerHTML = `<p>Username cannot be empty</p>`;
+          return;
+        }
+        if (Password === "") {
+          info.innerHTML = `<p>Password cannot be empty</p>`;
+          return;
+        }
+
+        if (Username === correctUsername && Password === correctPassword) {
+          info.innerHTML = `<p>Login successful</p>`;
+        } else if (
+          Username !== correctUsername &&
+          Password !== correctPassword
+        ) {
+          info.innerHTML = `<p>Invalid username and password</p>`;
+        } else if (Username !== correctUsername) {
+          info.innerHTML = `<p>Invalid username</p>`;
+        } else if (Password !== correctPassword) {
+          info.innerHTML = `<p>Invalid password</p>`;
+        }
+      };
+    </script>
+  </body>
+</html>
