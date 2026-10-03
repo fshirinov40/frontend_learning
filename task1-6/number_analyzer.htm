@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="number" placeholder="Enter a number:" />
+    <button id="submit">submit</button>
+    <div id="info"></div>
+
+    <script>
+      const button = document.getElementById("submit");
+      const info = document.getElementById("info");
+      let positivity, negativity, zero, even, divby3, divby5;
+      button.onclick = function () {
+        const number = Number(document.getElementById("number").value);
+        if (number > 0) {
+          positivity = "Yes";
+        } else {
+          positivity = "No";
+        }
+
+        if (number < 0) {
+          negativity = "Yes";
+        } else {
+          negativity = "No";
+        }
+
+        if (number === 0) {
+          zero = "Yes";
+        } else {
+          zero = "No";
+        }
+
+        if (number % 2 === 0) {
+          even = "Yes";
+        } else {
+          even = "No";
+        }
+
+        if (number % 3 === 0) {
+          divby3 = "Yes";
+        } else {
+          divby3 = "No";
+        }
+
+        if (number % 5 === 0) {
+          divby5 = "Yes";
+        } else {
+          divby5 = "No";
+        }
+
+        info.innerHTML = `
+        <p>Number:${number}</p>
+        <p>Positive:${positivity}</p>
+        <p>Negative:${negativity}</p>
+        <p>Zero:${zero}</p>
+        <p>Even:${even}</p>
+        <p>divby3:${divby3}</p>
+        <p>divby5:${divby5}</p>
+      `;
+      };
+    </script>
+  </body>
+</html>
