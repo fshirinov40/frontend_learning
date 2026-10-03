@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form style="display: flex; flex-direction: column; max-width: 400px">
+      <label for="exam1">Exam 1:</label>
+      <input type="number" name="exam1" id="exam1" />
+      <br />
+      <label for="exam2">Exam 2:</label>
+      <input type="number" name="exam2" id="exam2" />
+      <br />
+      <label for="exam3">Exam 3:</label>
+      <input type="number" name="exam3" id="exam3" />
+      <br />
+    </form>
+    <button id="submit">submit</button>
+    <div id="info"></div>
+    <script>
+      const button = document.getElementById("submit");
+      const info = document.getElementById("info");
+      button.onclick = function () {
+        const exam1 = Number(document.getElementById("exam1").value);
+        const exam2 = Number(document.getElementById("exam2").value);
+        const exam3 = Number(document.getElementById("exam3").value);
+        if (
+          exam1 < 0 ||
+          exam1 > 100 ||
+          exam2 < 0 ||
+          exam2 > 100 ||
+          exam3 < 0 ||
+          exam3 > 100
+        ) {
+          info.innerHTML = "<p>Invalid score</p>";
+          return;
+        }
+        let average = (exam1 + exam2 + exam3) / 3;
+        let grade;
+        let status;
+
+        if (average >= 90 && average <= 100) {
+          grade = "A";
+        } else if (average >= 80 && average < 90) {
+          grade = "B";
+        } else if (average >= 70 && average < 80) {
+          grade = "C";
+        } else if (average >= 60 && average < 70) {
+          grade = "D";
+        } else if (average >= 0 && average < 60) {
+          grade = "F";
+        }
+
+        if (grade != "F") {
+          status = "passed";
+        } else {
+          status = "cannot pass";
+        }
+        info.innerHTML = `
+        <p>Average:${average}</p>
+        <p>Grade:${grade}</p>
+        <p>Status:${status}</p>
+      `;
+      };
+    </script>
+  </body>
+</html>
