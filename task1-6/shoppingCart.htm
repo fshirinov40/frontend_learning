@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form style="display: flex; flex-direction: column; max-width: 400px">
+      <label for="pro1">Product 1 price:</label>
+      <input type="number" name="pro1" id="pro1" />
+      <br />
+      <label for="pro1q">Product 1 quantity:</label>
+      <input type="number" name="pro1q" id="pro1q" />
+      <br />
+      <br />
+      <label for="pro2">Product 2 price:</label>
+      <input type="number" name="pro2" id="pro2" />
+      <br />
+      <label for="pro2q">Product 2 quantity:</label>
+      <input type="number" name="pro2q" id="pro2q" />
+      <br />
+      <br />
+      <label for="pro3">Product 3 price:</label>
+      <input type="number" name="pro3" id="pro3" />
+      <br />
+      <label for="pro3q">Product 3 quantity:</label>
+      <input type="number" name="pro3q" id="pro3q" />
+      <br />
+      <br />
+    </form>
+    <button id="submit">submit</button>
+    <div id="info"></div>
+
+    <script>
+      const button = document.getElementById("submit");
+      const info = document.getElementById("info");
+      let subtotal, discount, discount_amount, final_price;
+      button.onclick = function () {
+        const pro1 = Number(document.getElementById("pro1").value);
+        const pro1q = Number(document.getElementById("pro1q").value);
+        const pro2 = Number(document.getElementById("pro2").value);
+        const pro2q = Number(document.getElementById("pro2q").value);
+        const pro3 = Number(document.getElementById("pro3").value);
+        const pro3q = Number(document.getElementById("pro3q").value);
+        subtotal = pro1 * pro1q + pro2 * pro2q + pro3 * pro3q;
+
+        function calculation() {
+          discount_amount = (subtotal * discount) / 100;
+          final_price = subtotal - discount_amount;
+        }
+
+        if (subtotal >= 100) {
+          discount = 10;
+          calculation();
+        } else if (subtotal >= 50) {
+          discount = 5;
+          calculation();
+        } else {
+          discount = 0;
+          calculation();
+        }
+
+        if (final_price > 100) {
+          final_price += 10;
+        }
+
+        info.innerHTML = `
+          <p>Subtotal: $${subtotal}</p>
+          <p>Discount: ${discount}%</p>
+          <p>Discount amount: $ ${discount_amount}</p>
+          <p>Final price: $ ${final_price}</p>
+        `;
+      };
+    </script>
+  </body>
+</html>
