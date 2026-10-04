@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p>1 - Check balance</p>
+      <p>2 - Deposite</p>
+      <p>3 - Withdraw</p>
+    </div>
+    <form style="display: flex; flex-direction: column; max-width: 200px">
+      <label for="operation">Choose operation:</label>
+      <select id="operation" name="operation">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+      </select>
+      <br />
+      <br />
+      <label for="amount">Enter amount:</label>
+      <input type="number" id="amount" name="amount" />
+    </form>
+    <br />
+    <button id="submit">submit</button>
+    <div id="info"></div>
+    <script>
+      let balance = 1000;
+      const button = document.getElementById("submit");
+      const info = document.getElementById("info");
+
+      button.onclick = function () {
+        const option = Number(document.getElementById("operation").value);
+        const amount = Number(document.getElementById("amount").value);
+        function function1() {
+          info.innerHTML = `
+            <p>Balance: $${balance}</p>
+          `;
+        }
+        function function2() {
+          if (amount <= 0) {
+            info.innerHTML = `
+            <p>invalid amount</p>
+          `;
+            return;
+          }
+          balance += amount;
+          info.innerHTML = `
+            <p>Deposite successful</p>
+            <p>Remaining balance: $${balance}</p>
+          `;
+        }
+        function function3() {
+          if (amount <= 0) {
+            info.innerHTML = `
+            <p>invalid amount</p>
+          `;
+            return;
+          }
+          if (amount > balance) {
+            info.innerHTML = `
+            <p>insufficient funds</p>
+          `;
+            return;
+          }
+          balance -= amount;
+          info.innerHTML = `
+            <p>Withdrawal successful</p>
+            <p>Remaining balance: $${balance}</p>
+          `;
+        }
+
+        if (option === 1) {
+          function1();
+        } else if (option === 2) {
+          function2();
+        } else if (option === 3) {
+          function3();
+        } else {
+          info.innerHTML = `
+            <p>Invalid operation</p>
+          `;
+        }
+      };
+    </script>
+  </body>
+</html>
