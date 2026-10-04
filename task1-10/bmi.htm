@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <label for="weight">Weight (kg):</label>
+      <input type="number" name="weight" id="weight" />
+      <br />
+      <br />
+      <label for="height">Height (m):</label>
+      <input type="number" name="height" id="height" />
+      <br />
+      <br />
+    </form>
+    <button id="submit">submit</button>
+    <div id="info"></div>
+    <script>
+      const button = document.getElementById("submit");
+      const info = document.getElementById("info");
+      let category;
+      button.onclick = function () {
+        const weight = Number(document.getElementById("weight").value);
+        const height = Number(document.getElementById("height").value);
+        let BMI = (weight / (height * height)).toFixed(2);
+        if (weight <= 0 || height <= 0) {
+          info.innerHTML = `
+            <p>invalid</p>
+          `;
+          return;
+        }
+        if (BMI < 18.5) {
+          category = "underweight";
+        } else if (BMI >= 18.5 && BMI < 25) {
+          category = "normal";
+        } else if (BMI >= 25 && BMI < 30) {
+          category = "overweight";
+        } else if (BMI >= 30) {
+          category = "obese";
+        }
+        info.innerHTML = `
+        <p>Weight: ${weight} kg</p>
+        <p>Height: ${height} m</p>
+        <p>BMI: ${BMI}</p>
+        <p>Category: ${category}</p>
+      `;
+      };
+    </script>
+  </body>
+</html>
