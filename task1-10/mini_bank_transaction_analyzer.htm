@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form style="display: flex; flex-direction: column; max-width: 300px">
+      <label for="inibal">Initial balance:</label>
+      <input type="number" name="inibal" id="inibal" />
+      <br />
+      <br />
+
+      <label for="transaction">Transaction type:</label>
+      <select name="transaction" id="transaction">
+        <option>Deposite</option>
+        <option>Withdraw</option>
+      </select>
+      <br />
+      <br />
+
+      <label for="amount">Amount:</label>
+      <input type="number" name="amount" id="amount" />
+      <br />
+      <br />
+    </form>
+
+    <button id="submit">submit</button>
+    <div id="info"></div>
+
+    <script>
+      const button = document.getElementById("submit");
+      const info = document.getElementById("info");
+
+      button.onclick = function () {
+        let inibal = Number(document.getElementById("inibal").value);
+        const amount = Number(document.getElementById("amount").value);
+        const transaction = document.getElementById("transaction").value;
+
+        const initial_balance = inibal;
+        let account_status;
+
+        if (inibal < 0) {
+          info.innerHTML = `<p>Invalid initial balance</p>`;
+          return;
+        }
+
+        if (amount <= 0) {
+          info.innerHTML = `<p>Invalid amount</p>`;
+          return;
+        }
+
+        if (transaction === "Deposite") {
+          inibal += amount;
+        } else if (transaction === "Withdraw") {
+          if (amount > inibal) {
+            info.innerHTML = `<p>Insufficient funds</p>`;
+            return;
+          }
+
+          inibal -= amount;
+        }
+
+        if (inibal >= 1000) {
+          account_status = "Premium";
+        } else {
+          account_status = "Standart";
+        }
+
+        info.innerHTML = `
+          <p>Initial balance: $${initial_balance}</p>
+          <p>Transaction: ${transaction}</p>
+          <p>Amount: $${amount}</p>
+          <p>Final balance: $${inibal}</p>
+          <p>Status: Successful</p>
+          <p>Account status: ${account_status}</p>
+        `;
+      };
+    </script>
+  </body>
+</html>
