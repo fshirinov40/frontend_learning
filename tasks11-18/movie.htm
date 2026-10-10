@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    <label for="age">Age:</label>
+    <input type="number" name="age" id="age">
+    <br>
+    <br>
+    <select id="ticket_type">
+      <option>Standart</option>
+      <option>VIP</option>
+    </select>
+    <br>
+    <br>
+    <label for="ticket_number">Number of tickets:</label>
+    <input type="number" name="ticket_number" id="ticket_number">
+    <br>
+    <br>
+  </form>
+
+  <button id="submit">submit</button>
+  <div id="info"></div>
+
+  <script>
+    const button = document.getElementById("submit");
+    const info = document.getElementById("info");
+    let ticket_price, original_price, discount, discount_amount, final_price;
+
+    button.onclick = function() {
+      const age = Number(document.getElementById("age").value);
+      const ticket_number = Number(document.getElementById("ticket_number").value);
+      const ticket_type = document.getElementById("ticket_type").value;
+
+      if(age < 0) {
+        info.innerHTML = `<p>Invalid age</p>`;
+        return;
+      }
+      if(ticket_number <= 0) {
+        info.innerHTML = `<p>Invalid number of tickets</p>`;
+        return;
+      }
+
+      if(ticket_type === 'Standart') {
+        ticket_price = 10;
+        original_price = ticket_price * ticket_number;
+      }
+      else if(ticket_type === 'VIP') {
+        ticket_price = 20;
+        original_price = ticket_price * ticket_number;
+      }
+
+      if(age < 6 && age > 0) discount = 100;
+      else if(age >= 6 && age <=17) discount = 50;
+      else if(age > 17 && age <=64) discount = 0;
+      else if(age > 64) discount = 30;
+      else {
+        info.innerHTML = `<p>Invalid age</p>`;
+        return;
+      }
+
+      discount_amount = (original_price * discount) / 100;
+
+      final_price = original_price - discount_amount;
+
+      info.innerHTML = `
+        <p>Age: ${age}</p>
+        <p>Ticket type: ${ticket_type}</p>
+        <p>Tickets: ${ticket_number}</p>
+
+        <p>Original price: $${original_price}</p>
+        <p>Discount: ${discount}%</p>
+        <p>Discount amount: ${discount_amount}</p>
+        <p>Final price: $${final_price}</p>
+      `
+
+      if(final_price >= 50) {
+        info.innerHTML += `<p>Bonus: Free Popcorn</p>`
+      }
+    }
+  </script>
+</body>
+</html>
