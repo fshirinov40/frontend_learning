@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    <label for="previous">Previous meter reading</label>
+    <input type="number" id="previous" name="previous">
+    <br>
+    <br>
+    <label for="current">Current meter reading</label>
+    <input type="number" id="current" name="current">
+    <br>
+    <br>
+  </form>
+    <button id="submit">submit</button>
+    <div id="info"></div>
+
+    <script>
+      const submit = document.getElementById("submit");
+      const info = document.getElementById("info");
+      let consumption, rate, electricity_cost, consumption_level;
+
+      submit.onclick = function () {
+        if (
+          document.getElementById("previous").value === "" ||
+          document.getElementById("current").value === ""
+        ) {
+          info.innerHTML = `<p>Both inputs are required</p>`;
+          return;
+        }
+        const previous = Number(document.getElementById("previous").value);
+        const current = Number(document.getElementById("current").value);
+        if(current < previous) {
+          info.innerHTML = `<p>Invalid meter readings</p>`;
+          return;
+        }
+        else if(current === previous) {
+          info.innerHTML = `<p>No electricity consumed</p>`;
+          return;
+        }
+
+        consumption = current - previous;
+
+        if(consumption >= 0 && consumption <=100) {
+          rate = 0.1;
+        }
+        else if(consumption > 100 && consumption <=300) {
+          rate = 0.15;
+        }
+        else if(consumption > 300) {
+          rate = 0.2;
+        }
+
+        electricity_cost = consumption * rate;
+
+        if(electricity_cost >= 50) {
+          consumption_level = 'High';
+        }
+        else {
+          consumption_level = 'Normal';
+        }
+        info.innerHTML = `
+          <p>Previous reading: ${previous}</p>
+          <p>Current reading: ${current}</p>
+          <p>Consumption: ${consumption} kWh</p>
+          <p>Rate: $${rate}</p>
+          <p>Electricity cost: ${electricity_cost}</p>
+          <p>Consumption level: ${consumption_level}</p>
+        `
+      }
+    </script>
+</body>
+</html>
