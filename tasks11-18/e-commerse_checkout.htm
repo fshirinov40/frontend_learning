@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form style="display: flex; flex-direction: column; max-width: 400px;">
+    <label for="product_price">Product price:</label>
+    <input type="number" id="product_price">
+    <br>
+    <br>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity">
+    <br>
+    <br>
+    <select id="customer_type" style="max-width: 150px;">
+      <option>regular</option>
+      <option>premium</option>
+    </select>
+    <br>
+    <br>
+    <select id="payment_method" style="max-width: 150px;">
+      <option>card</option>
+      <option>cash</option>
+    </select>
+    <br>
+    <br>
+  </form>
+
+  <button id="submit">submit</button>
+  <div id="info"></div>
+
+  <script>
+    const button = document.getElementById("submit");
+    const info = document.getElementById("info");
+
+    button.onclick = function () {
+      let subtotal, discount, shipping, discount_amount, after_discount, after_dis_and_ship, payment_fee, payment_fee_amount, final_price;
+
+      const product_price = Number(document.getElementById("product_price").value);
+      const quantity=Number(document.getElementById("quantity").value);
+      const customer_type =document.getElementById("customer_type").value;
+      const payment_method =document.getElementById("payment_method").value;
+
+      if(product_price <= 0 || quantity <=0) {
+        info.innerHTML = `invalid input`;
+        return;
+      }
+
+      subtotal = product_price * quantity;
+
+      if(customer_type === 'premium' && subtotal >= 100) discount = 15;
+      else if(customer_type === 'premium' && subtotal < 100) discount = 10;
+      else if(customer_type === 'regular' && subtotal >= 200) discount = 5;
+      else discount = 0;
+
+      discount_amount = (subtotal * discount) / 100;
+      after_discount = subtotal - discount_amount;
+
+      if(subtotal >= 150) shipping = 'Free';
+      else shipping = 10;
+
+      if(payment_method === 'card') payment_fee = 2;
+      else if (payment_method === 'cash')  payment_fee = 0;
+
+      if(shipping !== 'Free') after_dis_and_ship = after_discount + shipping;
+      else after_dis_and_ship = after_discount;
+
+      payment_fee_amount = (after_dis_and_ship * payment_fee) / 100;
+
+      final_price = after_dis_and_ship + payment_fee_amount;
+
+
+      info.innerHTML = `
+        <p>Product price: $${product_price}</p>
+        <p>Quantity: ${quantity}</p>
+        <p>Customer: ${customer_type}</p>
+        <p>Payment: ${payment_method}</p>
+
+        <p>Subtotal: $${subtotal}</p>
+        <p>Discount: ${discount}%</p>
+        <p>Discount amount: $${discount_amount}</p>
+        <p>After discount: $${after_discount}</p>
+        <p>Shipping: $${shipping}</p>
+        <p>Payment Fee: ${payment_fee}%</p>
+        <p>Payment Fee Amount: $${payment_fee_amount}</p>
+        <p>Final price: $${final_price}</p>
+      `
+    }
+  </script>
+</body>
+</html>
