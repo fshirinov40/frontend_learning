@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const car = {
+      brand: "BMW", model: "M5", year: 2024, speed: 120,
+
+      getInfo() {
+        return `<p>brand: ${this.brand}, model: ${this.model}, year: ${this.year}, speed: ${this.speed}</p>`
+      },
+
+      getAge() {
+        return 2026 - this.year;
+      },
+
+      accelerate() {
+        this.speed += 20;
+      },
+
+      brake() {
+        this.speed -= 20;
+        if(this.speed < 0) {
+          this.speed = 0;
+        }
+      }
+    }
+
+      console.log(car.getInfo());
+      console.log(car.getAge());
+      car.accelerate();
+      console.log(car.speed);
+      car.brake();
+      console.log(car.speed);
+  </script>
+</body>
+</html>
