@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const student = {
+      name: "Ali", age: 21, grade: 91, department: "Computer Engineering"
+    };
+    console.log(Object.keys(student));
+    console.log(Object.values(student));
+    console.log(Object.entries(student));
+
+    for(let key of Object.keys(student)) {
+      console.log(key);
+    }
+    console.log(Object.keys(student).length);
+
+    console.log(student.name);
+    console.log(student.age);
+    console.log(student.grade);
+    console.log(student.department);
+  </script>
+</body>
+</html>
