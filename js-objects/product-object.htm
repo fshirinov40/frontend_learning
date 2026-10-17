@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const product = { name: "Laptop", price: 1500, discount: 10,
+    getPrice() {
+      this.price -= (this.price * this.discount) / 100;
+      return `Endirim: ${(this.price * this.discount) / 100}`;
+    },
+    getInfo() {
+      return `${this.name}
+       New price: ${this.price}`;
+    }
+  };
+
+  console.log(product.getPrice());
+  console.log(product.getInfo());
+  </script>
+</body>
+</html>
