@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const account = {
+      owner: "Islam", balance: 1000,
+      deposit(amount) {
+        if(amount>0) {
+        this.balance += amount;
+        return `Deposit: ${amount}`;
+      }
+      },
+      withdraw(amount) {
+        if(amount>0 && amount<=this.balance) {
+        this.balance -= amount;
+        return `Withdraw: ${amount}`;
+      }
+      },
+      checkBalance() {
+        return `Islam balance: ${this.balance}`
+      },
+      transfer(amount, otherAccount) {
+        if(amount>0 && amount<=this.balance) {
+          this.balance -= amount;
+          otherAccount.balance += amount;
+          return `Transfer: ${amount}`
+        }
+      }
+    };
+
+    const account2 = {
+      owner: "Fuad", balance: 600,
+      transfer(amount, otherAccount) {
+        if(amount>0 && amount<=this.balance) {
+          this.balance -= amount;
+          otherAccount.balance += amount;
+          return `Transfer: ${amount}`
+        }
+      },
+      checkBalance() {
+        return `Fuad balance: ${this.balance}`
+      }
+    }
+
+    console.log(account.checkBalance());
+    console.log(account.deposit(200));
+    console.log(account.checkBalance());
+    console.log(account.withdraw(400));
+    console.log(account.checkBalance());
+    console.log(account.transfer(200,account2));
+    console.log(account.checkBalance());
+  </script>
+</body>
+</html>
