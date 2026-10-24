@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const cart = {
+      items:
+      [ 
+        { name: "Keyboard", price: 80, quantity: 2 }, 
+        { name: "Mouse", price: 30, quantity: 1 }, 
+        { name: "Monitor", price: 400, quantity: 1}
+      ],
+
+      getTotal() {
+        let total = 0;
+        for(let i=0; i<this.items.length; i++) {
+          total += this.items[i].price * this.items[i].quantity;
+        }
+        return total;
+      },
+
+      addItem(name, price, quantity) {
+        for (let i = 0; i < this.items.length; i++) {
+          if (name === this.items[i].name) {
+            this.items[i].quantity += quantity;
+            return;
+          }
+        }
+
+        this.items.push({
+          name: name,
+          price: price,
+          quantity: quantity
+        });
+      },
+
+      removeItem(name) {
+        for(let i=0; i<this.items.length; i++) {
+          if(name === this.items[i].name) {
+            this.items.splice(i,1);
+          }
+          return;
+        }
+      },
+
+      updateQuantity(name) {
+        for(let i=0; i<this.items.length; i++) {
+          if(name === this.items[i].name) {
+            this.items[i].quantity +=1;
+          }
+        }
+      },
+
+      getItemCount() {
+        let count = 0;
+        for(let i=0; i<this.items.length; i++) {
+          count += this.items[i].quantity;
+        }
+        return count;
+      },
+
+      applyDiscount(percent) {
+        let total = this.getTotal();
+        let endirim = (total * percent) / 100;
+        total -= endirim;
+        return total;
+      }
+  }
+    cart.addItem('Brush',50,1);
+
+    cart.removeItem('Monitor');
+
+    cart.updateQuantity('Keyboard');
+
+    console.log(cart.items);
+    console.log(cart.getTotal());
+    console.log(cart.applyDiscount(10));
+    console.log(cart.getItemCount());
+  </script>
+</body>
+</html>
