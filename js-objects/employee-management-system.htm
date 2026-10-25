@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const company = 
+  {
+      name: "Tech Solutions", 
+      employees:
+    [
+      { id: 1, name: "Ali", salary: 1500, department: "IT" }, 
+      { id: 2, name: "Aysel", salary: 2000, department: "HR" }, 
+      { id: 3, name: "Murad", salary: 1800, department: "IT" }
+    ],
+
+    addEmployee(employee) {
+      this.employees.push(employee);
+    },
+
+    removeEmployee(id) {
+      for(let i=0; i<this.employees.length; i++) {
+        if(this.employees[i].id === id) {
+          this.employees.splice(i,1);
+        }
+      }
+    },
+
+    findEmployee(id) {
+      let thisEmployee;
+      for(let i=0; i<this.employees.length; i++) {
+        if(this.employees[i].id === id) {
+          thisEmployee = this.employees[i];
+        }
+      }
+      return thisEmployee;
+    },
+
+    getEmployeesbyDepartment(department) {
+      let employeebyDepartment;
+      for(let i=0; i<this.employees.length; i++) {
+        if(this.employees[i].department === department) {
+          employeebyDepartment = this.employees[i];
+        }
+      }
+      return employeebyDepartment;
+    },
+
+    getAverageSalary() {
+      let totalSalary = 0, count = 0, averageSalary = 0;
+      for(let i=0; i<this.employees.length; i++) {
+        totalSalary += this.employees[i].salary;
+        count++;
+      }
+      averageSalary = totalSalary / count;
+      return averageSalary;
+    },
+
+    increaseSalary(id, percent) {
+      for(let i=0; i<this.employees.length; i++) {
+        if(this.employees[i].id === id) {
+          this.employees[i].salary += (this.employees[i].salary * percent) / 100;
+        }
+      }
+    },
+
+    getHighestPaidEmployee() {
+      let highestSalary = 0, highestPaidEmployee = 0;
+      for(let i=0; i<this.employees.length; i++) {
+        if(this.employees[i].salary > highestSalary) {
+          highestSalary = this.employees[i].salary;
+        }
+      }
+      for(let i=0; i<this.employees.length; i++) {
+        if(this.employees[i].salary === highestSalary) {
+          highestPaidEmployee = this.employees[i].name;
+        }
+      }
+      return highestPaidEmployee;
+    }
+  };
+
+  company.addEmployee({id: 4, name: "Isi", salary: 1300, department: "IT"});
+  company.removeEmployee(1);
+  company.increaseSalary(2, 30);
+  console.log(company.findEmployee(2));
+  console.log(company.getEmployeesbyDepartment("HR"));
+  console.log(company.employees);
+  console.log(company.getAverageSalary());
+  console.log(company.getHighestPaidEmployee());
+  </script>
+</body>
+</html>
