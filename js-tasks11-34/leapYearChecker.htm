@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <label for="year">Enter year:</label>
+  <input type="number" name="year" id="year">
+  <br>
+  <button id="submit">Submit</button>
+
+  <div id="info"></div>
+
+  <script>
+    const button = document.getElementById('submit');
+    const info = document.getElementById('info');
+
+    button.onclick = function function1() {
+      const year = document.getElementById('year').value;
+
+    if (year !== '') {
+      if((year % 4 === 0 && year % 100 !== 0)  || year % 400 === 0) {
+        info.innerHTML = `Leap year`;
+      }
+      else {
+        info.innerHTML = `Not a leap year`;
+      }
+    }
+
+    else {
+      info.innerHTML = 'Invalid input';
+    }
+    }
+    
+  </script>
+</body>
+</html>
